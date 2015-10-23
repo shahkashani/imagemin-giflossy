@@ -32,6 +32,32 @@ module.exports = function (opts) {
 			args.push('--interlace');
 		}
 
+		// Image Transformation Options
+		if (opts.resize) {
+			args.push('--resize');
+			args.push(opts.resize);
+		}
+
+		if (opts.noLogicalScreen) {
+			args.push('--no-logical-screen');
+		}
+
+		if (opts.resizeMethod) {
+			args.push('--resize-method');
+			args.push(opts.resizeMethod);
+		}
+
+		// Color Options
+		if (opts.colors) {
+			args.push('--colors');
+			args.push(opts.colors);
+		}
+
+		if (opts.resizeMethod) {
+			args.push('--color-method');
+			args.push(opts.colorMethod);
+		}
+
 		var cp = spawn(gifsicle, args);
 
 		cp.stderr.setEncoding('utf8');
