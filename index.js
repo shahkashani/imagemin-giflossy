@@ -53,7 +53,7 @@ module.exports = function (opts) {
 			args.push(opts.colors);
 		}
 
-		if (opts.resizeMethod) {
+		if (opts.colorMethod) {
 			args.push('--color-method');
 			args.push(opts.colorMethod);
 		}
