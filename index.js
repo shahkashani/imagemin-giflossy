@@ -80,10 +80,7 @@ module.exports = function (opts) {
 		});
 
 		cp.on('close', function () {
-			if (len < file.contents.length) {
-				file.contents = Buffer.concat(ret, len);
-			}
-
+			file.contents = Buffer.concat(ret, len);
 			cb(null, file);
 		});
 
