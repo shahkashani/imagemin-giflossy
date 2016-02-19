@@ -58,6 +58,14 @@ module.exports = function (opts) {
 			args.push(opts.colorMethod);
 		}
 
+		// Animation Options
+		if (opts.optimize) {
+			args.push('--optimize');
+			args.push(opts.optimize);
+		} else if (opts.unoptimize) {
+			args.push('--unoptimize');
+		}
+
 		var cp = spawn(gifsicle, args);
 
 		cp.stderr.setEncoding('utf8');
