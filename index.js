@@ -60,8 +60,7 @@ module.exports = function (opts) {
 
 		// Animation Options
 		if (opts.optimize) {
-			args.push('--optimize');
-			args.push(opts.optimize);
+			args.push(`-O${ opts.optimize }`);
 		} else if (opts.unoptimize) {
 			args.push('--unoptimize');
 		}
