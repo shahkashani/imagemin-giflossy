@@ -6,9 +6,8 @@
 ## Install
 
 ```
-$ npm install --save imagemin-gifsicle
+N/A
 ```
-
 
 ## Usage
 
@@ -94,7 +93,7 @@ imageminGifsicle({ resizeMethod: 'sample' });
 Type: `number`  
 Default: `undefined`
 
-Reduce the number of distinct colors in each output GIF to *num* or less. *Num* must be between `2` and `256`. 
+Reduce the number of distinct colors in each output GIF to *num* or less. *Num* must be between `2` and `256`.
 
 e.g.:
 ```js
@@ -111,6 +110,39 @@ Determine how a smaller colormap is chosen.
 e.g.:
 ```js
 imageminGifsicle({ colorMethod: 'blend-diversity' });
+```
+
+### options.optimize
+
+Type: `string`  
+Default: `1`
+
+Optimize output GIF animations for space.
+
+There are currently three levels:
+ * `1`: Stores only the changed portion of each image. This is the default.
+ * `2`: Also uses transparency to shrink the file further.
+ * `3`: Try several optimization methods (usually slower, sometimes better results).
+
+Other optimization flags provide finer-grained control.
+
+ * `keep-empty`: Preserve empty transparent frames (they are dropped by default).
+
+e.g.:
+```js
+imageminGifsicle({ optimize: '3' });
+```
+
+### options.unoptimize
+
+Type: `boolean`  
+Default: `false`
+
+Unoptimize GIF animations into an easy-to-edit form.
+
+e.g.:
+```js
+imageminGifsicle({ unoptimize: true });
 ```
 
 ## License
