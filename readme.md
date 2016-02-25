@@ -1,7 +1,6 @@
 # imagemin-giflossy
 
 [![Build Status](http://img.shields.io/travis/jihchi/imagemin-giflossy.svg?style=flat)](https://travis-ci.org/jihchi/imagemin-giflossy)
-
 [![Build status](https://ci.appveyor.com/api/projects/status/hdus9imkfyrlh5ls?svg=true)](https://ci.appveyor.com/project/jihchi/imagemin-giflossy)
 
 > giflossy imagemin plugin
