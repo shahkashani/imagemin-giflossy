@@ -58,7 +58,7 @@ imageminGiflossy({ interlaced: true });
 ### options.lossy
 
 Type: `Number`  
-Default: <None>
+Default: `undefined`
 
 Order pixel patterns to create smaller GIFs at cost of artifacts and noise.
 
