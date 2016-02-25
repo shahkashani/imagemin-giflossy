@@ -1,7 +1,7 @@
 'use strict';
 
 var spawn = require('child_process').spawn;
-var gifsicle = require('gifsicle');
+var giflossy = require('giflossy');
 var isGif = require('is-gif');
 var through = require('through2');
 
@@ -32,6 +32,10 @@ module.exports = function (opts) {
 			args.push('--interlace');
 		}
 
+		if (opts.lossy) {
+			args.push('--lossy=' + opts.lossy);
+		}
+
 		// Image Transformation Options
 		if (opts.resize) {
 			args.push('--resize');
@@ -60,12 +64,12 @@ module.exports = function (opts) {
 
 		// Animation Options
 		if (opts.optimize) {
-			args.push(`-O${ opts.optimize }`);
+			args.push('-O' + opts.optimize);
 		} else if (opts.unoptimize) {
 			args.push('--unoptimize');
 		}
 
-		var cp = spawn(gifsicle, args);
+		var cp = spawn(giflossy, args);
 
 		cp.stderr.setEncoding('utf8');
 		cp.stderr.on('data', function (data) {

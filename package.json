@@ -1,25 +1,15 @@
 {
-  "name": "imagemin-gifsicle2",
-  "version": "4.4.1",
-  "description": "gifsicle imagemin plugin",
+  "name": "imagemin-giflossy",
+  "version": "1.0.0-rc1",
+  "description": "giflossy imagemin plugin",
   "license": "MIT",
-  "repository": "imagemin/imagemin-gifsicle",
+  "repository": "jihchi/imagemin-giflossy",
   "author": {
-    "name": "Kevin Mårtensson",
-    "email": "kevinmartensson@gmail.com",
-    "url": "github.com/kevva"
+    "name": "Jih-Chi Lee",
+    "email": "achi@987.tw",
+    "url": "github.com/jihchi"
   },
-  "maintainers": [
-    {
-      "name": "Sindre Sorhus",
-      "email": "sindresorhus@gmail.com",
-      "url": "sindresorhus.com"
-    },
-    {
-      "name": "Shinnosuke Watanabe",
-      "url": "github.com/shinnn"
-    }
-  ],
+  "maintainers": [],
   "engines": {
     "node": ">=0.10.0"
   },
@@ -33,6 +23,7 @@
     "compress",
     "gif",
     "gifsicle",
+    "giflossy",
     "gulpplugin",
     "image",
     "imageminplugin",
@@ -41,7 +32,7 @@
     "optimize"
   ],
   "dependencies": {
-    "gifsicle": "^3.0.0",
+    "giflossy": "^1.0.0-rc1",
     "is-gif": "^1.0.0",
     "through2": "^2.0.0"
   },

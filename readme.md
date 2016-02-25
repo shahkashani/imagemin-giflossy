@@ -1,24 +1,24 @@
-# imagemin-gifsicle [![Build Status](http://img.shields.io/travis/imagemin/imagemin-gifsicle.svg?style=flat)](https://travis-ci.org/imagemin/imagemin-gifsicle) [![Build status](https://ci.appveyor.com/api/projects/status/51vfu1ntxwx7t949?svg=true)](https://ci.appveyor.com/project/ShinnosukeWatanabe/imagemin-gifsicle)
+# imagemin-giflossy [![Build Status](http://img.shields.io/travis/jihchi/imagemin-giflossy.svg?style=flat)](https://travis-ci.org/jihchi/imagemin-giflossy) [![Build status](https://ci.appveyor.com/api/projects/status/51vfu1ntxwx7t949?svg=true)](https://ci.appveyor.com/project/jihchi/imagemin-giflossy)
 
-> gifsicle imagemin plugin
+> giflossy imagemin plugin
 
 
 ## Install
 
 ```
-N/A
+$ npm install --save imagemin-giflossy
 ```
 
 ## Usage
 
 ```js
 var Imagemin = require('imagemin');
-var imageminGifsicle = require('imagemin-gifsicle');
+var imageminGiflossy = require('imagemin-giflossy');
 
 new Imagemin()
 	.src('images/*.gif')
 	.dest('build/images')
-	.use(imageminGifsicle({interlaced: true}))
+	.use(imageminGiflossy({lossy: 80}))
 	.run();
 ```
 
@@ -26,11 +26,11 @@ You can also use this plugin with [gulp](http://gulpjs.com):
 
 ```js
 var gulp = require('gulp');
-var imageminGifsicle = require('imagemin-gifsicle');
+var imageminGiflossy = require('imagemin-giflossy');
 
 gulp.task('default', function () {
 	return gulp.src('images/*.gif')
-		.pipe(imageminGifsicle({interlaced: true})())
+		.pipe(imageminGiflossy({lossy: 80})())
 		.pipe(gulp.dest('build/images'));
 });
 ```
@@ -38,7 +38,7 @@ gulp.task('default', function () {
 
 ## API
 
-### imageminGifsicle(options)
+### imageminGiflossy(options)
 
 ### options.interlaced
 
@@ -49,7 +49,23 @@ Interlace gif for progressive rendering.
 
 e.g.:
 ```js
-imageminGifsicle({ interlaced: true });
+imageminGiflossy({ interlaced: true });
+```
+
+### options.lossy
+
+Type: `Number`  
+Default: <None>
+
+Order pixel patterns to create smaller GIFs at cost of artifacts and noise.
+
+Adjust lossy argument to quality you want (30 is very light compression, 200 is heavy).
+
+It works best when only little loss is introduced, and due to limitation of the compression algorithm very high loss levels won't give as much gain.
+
+e.g.:
+```js
+imageminGiflossy({ lossy: 80 });
 ```
 
 ### options.resize
@@ -61,7 +77,7 @@ Resize the output GIF to *widthxheight*.
 
 e.g.:
 ```js
-imageminGifsicle({ resize: '300x200' });
+imageminGiflossy({ resize: '300x200' });
 ```
 
 ### options.noLogicalScreen
@@ -73,7 +89,7 @@ Sets the output logical screen to the size of the largest output frame.
 
 e.g.:
 ```js
-imageminGifsicle({ noLogicalScreen: true });
+imageminGiflossy({ noLogicalScreen: true });
 ```
 
 ### options.resizeMethod
@@ -85,7 +101,7 @@ Set the method used to resize images.
 
 e.g.:
 ```js
-imageminGifsicle({ resizeMethod: 'sample' });
+imageminGiflossy({ resizeMethod: 'sample' });
 ```
 
 ### options.colors
@@ -97,7 +113,7 @@ Reduce the number of distinct colors in each output GIF to *num* or less. *Num* 
 
 e.g.:
 ```js
-imageminGifsicle({ colors: 128 });
+imageminGiflossy({ colors: 128 });
 ```
 
 ### options.colorMethod
@@ -109,7 +125,7 @@ Determine how a smaller colormap is chosen.
 
 e.g.:
 ```js
-imageminGifsicle({ colorMethod: 'blend-diversity' });
+imageminGiflossy({ colorMethod: 'blend-diversity' });
 ```
 
 ### options.optimize
@@ -130,7 +146,7 @@ Other optimization flags provide finer-grained control.
 
 e.g.:
 ```js
-imageminGifsicle({ optimize: '3' });
+imageminGiflossy({ optimize: '3' });
 ```
 
 ### options.unoptimize
@@ -142,7 +158,7 @@ Unoptimize GIF animations into an easy-to-edit form.
 
 e.g.:
 ```js
-imageminGifsicle({ unoptimize: true });
+imageminGiflossy({ unoptimize: true });
 ```
 
 ## License
