@@ -1,6 +1,6 @@
 {
   "name": "imagemin-giflossy",
-  "version": "1.0.0-rc1",
+  "version": "1.0.0-rc2",
   "description": "giflossy imagemin plugin",
   "license": "MIT",
   "repository": "jihchi/imagemin-giflossy",
@@ -32,7 +32,7 @@
     "optimize"
   ],
   "dependencies": {
-    "giflossy": "^1.0.0-rc1",
+    "giflossy": "^1.0.0-rc2",
     "is-gif": "^1.0.0",
     "through2": "^2.0.0"
   },
