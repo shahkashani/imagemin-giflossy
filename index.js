@@ -29,7 +29,7 @@ module.exports = opts => buf => {
 	}
 
 	if (opts.lossy) {
-		args.push('--lossy=' + opts.lossy);
+		args.push(`--lossy=${opts.lossy}`);
 	}
 
 	// Image Transformation Options
@@ -60,12 +60,12 @@ module.exports = opts => buf => {
 
 	// Animation Options
 	if (opts.optimize) {
-		args.push('-O' + opts.optimize);
+		args.push(`-O${opts.optimize}`);
 	} else if (opts.unoptimize) {
 		args.push('--unoptimize');
 	}
 
-  args.push('--output', execBuffer.output, execBuffer.input);
+	args.push('--output', execBuffer.output, execBuffer.input);
 
 	return execBuffer({
 		input: buf,
