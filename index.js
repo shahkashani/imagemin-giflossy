@@ -1,100 +1,78 @@
 'use strict';
+const execBuffer = require('exec-buffer');
+const giflossy = require('giflossy');
+const isGif = require('is-gif');
 
-var spawn = require('child_process').spawn;
-var giflossy = require('giflossy');
-var isGif = require('is-gif');
-var through = require('through2');
+module.exports = opts => buf => {
+	opts = Object.assign({}, opts);
 
-module.exports = function (opts) {
-	opts = opts || {};
+	if (!Buffer.isBuffer(buf)) {
+		return Promise.reject(new TypeError('Expected a buffer'));
+	}
 
-	return through.ctor({objectMode: true}, function (file, enc, cb) {
-		if (file.isNull()) {
-			cb(null, file);
-			return;
-		}
+	if (!isGif(buf)) {
+		return Promise.resolve(buf);
+	}
 
-		if (file.isStream()) {
-			cb(new Error('Streaming is not supported'));
-			return;
-		}
+	const args = ['--no-warnings'];
 
-		if (!isGif(file.contents)) {
-			cb(null, file);
-			return;
-		}
+	if (opts.interlaced) {
+		args.push('--interlace');
+	}
 
-		var args = ['-w'];
-		var ret = [];
-		var len = 0;
+	if (opts.optimizationLevel) {
+		args.push(`--optimize=${opts.optimizationLevel}`);
+	}
 
-		if (opts.interlaced) {
-			args.push('--interlace');
-		}
+	if (opts.colors) {
+		args.push(`--colors=${opts.colors}`);
+	}
 
-		if (opts.lossy) {
-			args.push('--lossy=' + opts.lossy);
-		}
+	if (opts.lossy) {
+		args.push('--lossy=' + opts.lossy);
+	}
 
-		// Image Transformation Options
-		if (opts.resize) {
-			args.push('--resize');
-			args.push(opts.resize);
-		}
+	// Image Transformation Options
+	if (opts.resize) {
+		args.push('--resize');
+		args.push(opts.resize);
+	}
 
-		if (opts.noLogicalScreen) {
-			args.push('--no-logical-screen');
-		}
+	if (opts.noLogicalScreen) {
+		args.push('--no-logical-screen');
+	}
 
-		if (opts.resizeMethod) {
-			args.push('--resize-method');
-			args.push(opts.resizeMethod);
-		}
+	if (opts.resizeMethod) {
+		args.push('--resize-method');
+		args.push(opts.resizeMethod);
+	}
 
-		// Color Options
-		if (opts.colors) {
-			args.push('--colors');
-			args.push(opts.colors);
-		}
+	// Color Options
+	if (opts.colors) {
+		args.push('--colors');
+		args.push(opts.colors);
+	}
 
-		if (opts.colorMethod) {
-			args.push('--color-method');
-			args.push(opts.colorMethod);
-		}
+	if (opts.colorMethod) {
+		args.push('--color-method');
+		args.push(opts.colorMethod);
+	}
 
-		// Animation Options
-		if (opts.optimize) {
-			args.push('-O' + opts.optimize);
-		} else if (opts.unoptimize) {
-			args.push('--unoptimize');
-		}
+	// Animation Options
+	if (opts.optimize) {
+		args.push('-O' + opts.optimize);
+	} else if (opts.unoptimize) {
+		args.push('--unoptimize');
+	}
 
-		var cp = spawn(giflossy, args);
+  args.push('--output', execBuffer.output, execBuffer.input);
 
-		cp.stderr.setEncoding('utf8');
-		cp.stderr.on('data', function (data) {
-			var err = new Error(data);
-			err.fileName = file.path;
-			cb(err);
-			return;
-		});
-
-		cp.stdout.on('data', function (data) {
-			ret.push(data);
-			len += data.length;
-		});
-
-		cp.on('error', function (err) {
-			err.fileName = file.path;
-			cb(err);
-			return;
-		});
-
-		cp.on('close', function () {
-			file.contents = Buffer.concat(ret, len);
-			cb(null, file);
-		});
-
-		cp.stdin.end(file.contents);
+	return execBuffer({
+		input: buf,
+		bin: giflossy,
+		args
+	}).catch(err => {
+		err.message = err.stderr || err.message;
+		throw err;
 	});
 };

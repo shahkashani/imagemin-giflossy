@@ -1,9 +1,4 @@
-# imagemin-giflossy
-
-[![npm version](https://img.shields.io/npm/v/imagemin-giflossy.svg)](https://www.npmjs.com/package/imagemin-giflossy)
-[![npm downloads](https://img.shields.io/npm/dm/imagemin-giflossy.svg)](https://www.npmjs.com/package/giflossy)
-[![Build Status](http://img.shields.io/travis/jihchi/imagemin-giflossy.svg?style=flat)](https://travis-ci.org/jihchi/imagemin-giflossy)
-[![Build status](https://ci.appveyor.com/api/projects/status/hdus9imkfyrlh5ls?svg=true)](https://ci.appveyor.com/project/jihchi/imagemin-giflossy)
+# imagemin-giflossy [![npm version](https://img.shields.io/npm/v/imagemin-giflossy.svg)](https://www.npmjs.com/package/imagemin-giflossy) [![npm downloads](https://img.shields.io/npm/dm/imagemin-giflossy.svg)](https://www.npmjs.com/package/giflossy) [![Build Status](http://img.shields.io/travis/jihchi/imagemin-giflossy.svg?style=flat)](https://travis-ci.org/jihchi/imagemin-giflossy) [![Build status](https://ci.appveyor.com/api/projects/status/hdus9imkfyrlh5ls?svg=true)](https://ci.appveyor.com/project/jihchi/imagemin-giflossy)
 
 > giflossy imagemin plugin
 
@@ -17,47 +12,50 @@ $ npm install --save imagemin-giflossy
 ## Usage
 
 ```js
-var Imagemin = require('imagemin');
-var imageminGiflossy = require('imagemin-giflossy');
+const imagemin = require('imagemin');
+const imageminGiflossy = require('imagemin-giflossy');
 
-new Imagemin()
-	.src('images/*.gif')
-	.dest('build/images')
-	.use(imageminGiflossy({lossy: 80}))
-	.run();
-```
-
-You can also use this plugin with [gulp](http://gulpjs.com):
-
-```js
-var gulp = require('gulp');
-var imageminGiflossy = require('imagemin-giflossy');
-
-gulp.task('default', function () {
-	return gulp.src('images/*.gif')
-		.pipe(imageminGiflossy({lossy: 80})())
-		.pipe(gulp.dest('build/images'));
+imagemin(['images/*.gif'], 'build/images', {use: [imageminGiflossy({lossy: 80})]}).then(() => {
+	console.log('Images optimized');
 });
 ```
 
 
 ## API
 
-### imageminGiflossy(options)
+### imageminGiflossy([options])(buffer)
 
-### options.interlaced
+Returns a promise for a buffer.
 
-Type: `boolean`  
+#### options
+
+##### interlaced
+
+Type: `boolean`<br>
 Default: `false`
 
 Interlace gif for progressive rendering.
 
-e.g.:
-```js
-imageminGiflossy({ interlaced: true });
-```
+##### optimizationLevel
 
-### options.lossy
+Type: `number`<br>
+Default: `1`
+
+Select an optimization level between `1` and `3`.
+
+> The optimization level determines how much optimization is done; higher levels take longer, but may have better results.
+
+1. Stores only the changed portion of each image.
+2. Also uses transparency to shrink the file further.
+3. Try several optimization methods (usually slower, sometimes better results)
+
+##### colors
+
+Type: `number`
+
+Reduce the number of distinct colors in each output GIF to num or less. Num must be between 2 and 256.
+
+##### lossy
 
 Type: `Number`  
 Default: `undefined`
@@ -73,7 +71,7 @@ e.g.:
 imageminGiflossy({ lossy: 80 });
 ```
 
-### options.resize
+##### resize
 
 Type: `string`  
 Default: `undefined`
@@ -85,7 +83,7 @@ e.g.:
 imageminGiflossy({ resize: '300x200' });
 ```
 
-### options.noLogicalScreen
+##### noLogicalScreen
 
 Type: `boolean`  
 Default: `false`
@@ -97,7 +95,7 @@ e.g.:
 imageminGiflossy({ noLogicalScreen: true });
 ```
 
-### options.resizeMethod
+##### resizeMethod
 
 Type: `string`  
 Default: `mix`
@@ -109,19 +107,7 @@ e.g.:
 imageminGiflossy({ resizeMethod: 'sample' });
 ```
 
-### options.colors
-
-Type: `number`  
-Default: `undefined`
-
-Reduce the number of distinct colors in each output GIF to *num* or less. *Num* must be between `2` and `256`.
-
-e.g.:
-```js
-imageminGiflossy({ colors: 128 });
-```
-
-### options.colorMethod
+##### colorMethod
 
 Type: `string`  
 Default: `diversity`
@@ -133,7 +119,7 @@ e.g.:
 imageminGiflossy({ colorMethod: 'blend-diversity' });
 ```
 
-### options.optimize
+##### optimize
 
 Type: `string`  
 Default: `1`
@@ -154,7 +140,7 @@ e.g.:
 imageminGiflossy({ optimize: '3' });
 ```
 
-### options.unoptimize
+##### unoptimize
 
 Type: `boolean`  
 Default: `false`
@@ -165,6 +151,12 @@ e.g.:
 ```js
 imageminGiflossy({ unoptimize: true });
 ```
+
+#### buffer
+
+Type: `buffer`
+
+Buffer to optimize.
 
 ## License
 

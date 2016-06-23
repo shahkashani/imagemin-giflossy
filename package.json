@@ -1,6 +1,6 @@
 {
   "name": "imagemin-giflossy",
-  "version": "1.0.0-rc2",
+  "version": "5.0.0",
   "description": "giflossy imagemin plugin",
   "license": "MIT",
   "repository": "jihchi/imagemin-giflossy",
@@ -11,10 +11,10 @@
   },
   "maintainers": [],
   "engines": {
-    "node": ">=0.10.0"
+    "node": ">=4"
   },
   "scripts": {
-    "test": "node test/test.js"
+    "test": "xo && ava"
   },
   "files": [
     "index.js"
@@ -22,7 +22,6 @@
   "keywords": [
     "compress",
     "gif",
-    "gifsicle",
     "giflossy",
     "gulpplugin",
     "image",
@@ -32,12 +31,16 @@
     "optimize"
   ],
   "dependencies": {
+    "exec-buffer": "^3.0.0",
     "giflossy": "^1.0.0-rc2",
-    "is-gif": "^1.0.0",
-    "through2": "^2.0.0"
+    "is-gif": "^1.0.0"
   },
   "devDependencies": {
-    "ava": "^0.0.4",
-    "vinyl-file": "^1.1.0"
+    "ava": "*",
+    "pify": "^2.3.0",
+    "xo": "*"
+  },
+  "xo": {
+    "esnext": true
   }
 }
