@@ -1,6 +1,6 @@
 {
   "name": "imagemin-giflossy",
-  "version": "5.0.0",
+  "version": "5.1.0-1",
   "description": "giflossy imagemin plugin",
   "license": "MIT",
   "repository": "jihchi/imagemin-giflossy",
