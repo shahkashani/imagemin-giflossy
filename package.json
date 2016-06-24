@@ -32,7 +32,7 @@
   ],
   "dependencies": {
     "exec-buffer": "^3.0.0",
-    "giflossy": "^1.0.0-rc2",
+    "giflossy": "^3.0.3-3",
     "is-gif": "^1.0.0"
   },
   "devDependencies": {
