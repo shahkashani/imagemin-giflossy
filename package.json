@@ -1,13 +1,11 @@
 {
   "name": "imagemin-giflossy",
-  "version": "5.1.10",
+  "version": "1.0.0",
   "description": "giflossy imagemin plugin",
   "license": "MIT",
-  "repository": "jihchi/imagemin-giflossy",
+  "repository": "shahkashani/imagemin-giflossy",
   "author": {
-    "name": "Jih-Chi Lee",
-    "email": "achi@987.tw",
-    "url": "github.com/jihchi"
+    "name": "Shah Kashani"
   },
   "maintainers": [],
   "engines": {
@@ -31,14 +29,14 @@
     "optimize"
   ],
   "dependencies": {
-    "exec-buffer": "^3.0.0",
-    "giflossy": "^3.0.41",
-    "is-gif": "^1.0.0"
+    "exec-buffer": "^3.2.0",
+    "gifsicle": "^4.0.1",
+    "is-gif": "^3.0.0"
   },
   "devDependencies": {
-    "ava": "*",
-    "pify": "^2.3.0",
-    "xo": "*"
+    "ava": "^2.2.0",
+    "pify": "^4.0.1",
+    "xo": "^0.24.0"
   },
   "xo": {
     "esnext": true

@@ -1,6 +1,6 @@
 'use strict';
 const execBuffer = require('exec-buffer');
-const giflossy = require('giflossy');
+const giflossy = require('gifsicle');
 const isGif = require('is-gif');
 
 module.exports = opts => buf => {
@@ -71,8 +71,8 @@ module.exports = opts => buf => {
 		input: buf,
 		bin: giflossy,
 		args
-	}).catch(err => {
-		err.message = err.stderr || err.message;
-		throw err;
+	}).catch(error => {
+		error.message = error.stderr || error.message;
+		throw error;
 	});
 };
